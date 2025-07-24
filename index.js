@@ -12,6 +12,8 @@ import fileRoutes from './routes/fileRoutes.js';
 dotenv.config();
 const app = express();
 
+console.log('MONGO_URI:', process.env.MONGO_URI);
+
 // 🔹 CORS 허용 도메인
 const allowedOrigins = [
   'http://localhost:5173',
@@ -26,9 +28,12 @@ app.use(cors({
 app.use(express.json());
 
 // 🔹 DB 연결
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ DB 연결됨'))
-  .catch(err => console.error('❌ DB 연결 실패:', err));
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ DB 연결됨'))
+.catch(err => console.error('❌ DB 연결 실패:', err));
 
 // 🔹 정적 파일 제공 (예: /uploads/audio)
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
