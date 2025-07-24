@@ -29,12 +29,9 @@ router.delete('/:name', async (req, res) => {
 
 // ✅ 🔹 사용자 본인의 파일만 조회 (/files/my/files)
 router.get('/my/files', verifyToken, async (req, res) => {
-  try {
-    const userFiles = await File.find({ uploader: req.user.userId }).sort({ date: -1 });
-    res.json({ files: userFiles });
-  } catch (err) {
-    res.status(500).json({ error: '내 파일 조회 실패' });
-  }
+  const userName = req.user.name;
+  const userFiles = await File.find({ uploader: userName }).sort({ date: -1 });
+  res.json({ files: userFiles });
 });
 
 export default router;

@@ -9,14 +9,12 @@ console.log('📦 lps 라우터 정상 로드됨');
 router.get('/', async (req, res) => {
   try {
     const { genre } = req.query;
-    console.log('genre filter:', genre);
     const filter = genre ? { genre } : {};
     const lps = await Lp.find(filter);
-    console.log('lps count:', lps.length);
     res.json(lps);
   } catch (err) {
     console.error("LP 목록 조회 실패:", err);
-    res.status(500).json({ error: '서버 오류', detail: err.message });
+    res.status(500).json({ error: '서버 오류' });
   }
 });
 

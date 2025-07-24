@@ -10,7 +10,7 @@ import File from '../models/File.js';
 
 const router = express.Router();
 
-const uploadDir = path.join(process.cwd(), 'uploads', 'audio');
+const uploadDir = path.join('uploads', 'audio');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
