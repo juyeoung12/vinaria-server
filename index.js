@@ -5,7 +5,6 @@ import cors from 'cors';
 import lpRoutes from './routes/lps.js';
 import authRoutes from './routes/auth.js';
 import adminRoutes from './routes/adminRoutes.js';
-import fileRoutes from './routes/fileRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -26,7 +25,6 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/lps', lpRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/files', fileRoutes);
 
 
 
